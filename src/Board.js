@@ -165,14 +165,48 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
 
       // for each row check the index of any pieces, save to array
-      // 
+      // don't find row conflicts
+      // don't find col conflicts
+      // don't find minor diagonals
 
-      return false; // fixme
+      var game = this.attributes;
+
+      var numRows = game.n;
+
+      var pieces = [];
+
+      for (var r = 0; r < numRows; r++) {
+        var column = game[r].indexOf(1);
+        pieces.push(column);
+      }
+
+      var returnValue = false;
+
+      if (pieces.length !== 0) {
+        for (var r = 0; r < pieces.length; ++r) {
+
+          if (pieces[r] > -1) {
+
+            var row = r;
+            //var prevRow = (row - 1) || null;
+            var remain = pieces.slice( row + 1);
+
+            for (var n = ( row + 1); n < remain.length; ++n) {
+              if (pieces[n] === (pieces[row] + n)) {
+
+                //console.log(game);
+                returnValue = true;
+              }
+            }
+          }
+        }
+      }
+      return returnValue;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      return this.hasMajorDiagonalConflictAt(0);
     },
 
 
