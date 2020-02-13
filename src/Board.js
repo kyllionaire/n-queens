@@ -80,16 +80,27 @@
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
 
-      var row = this.attributes[rowIndex]
+      var row = this.attributes[rowIndex];
+      var results = [];
 
-      if (_.contains(row, 1)) {
+      // _.each(row, (space)=>{
+      //   if (pieces > 1) {
+      //     return true;
+      //   }
+      //   console.log(pieces);
+      //   pieces = (space === 1) ? ++pieces : pieces;
+      // });
 
-        return true;
-
-      } else {
-
-        return false;
+      for (var c = 0; c < row.length; ++c) {
+        if (row[c] === 1) {
+          results.push(true);
+        }
+        if (results.length > 1) {
+          return true;
+        }
       }
+
+      return false;
     },
 
     // test if any rows on this board contain conflicts
@@ -98,7 +109,6 @@
       var game = this.attributes;
 
       for (var row in game) {
-
         if (this.hasRowConflictAt(row)) {
           return true;
         }
@@ -116,13 +126,14 @@
     hasColConflictAt: function(colIndex) {
 
       var game = this.attributes;
-
       var cols = [];
 
       for (var row in game) {
-
-        if (game[row][colIndex] === 1) {
+        if (cols.length > 1) {
           return true;
+        }
+        if (game[row][colIndex] === 1) {
+          cols.push(true);
         }
       }
 
@@ -152,6 +163,10 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+
+      // for each row check the index of any pieces, save to array
+      // 
+
       return false; // fixme
     },
 
