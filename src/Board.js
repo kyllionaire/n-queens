@@ -62,7 +62,7 @@
     },
 
 
-/*
+ /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -183,18 +183,15 @@
       var returnValue = false;
 
       if (pieces.length !== 0) {
-        for (var r = 0; r < pieces.length; ++r) {
+        for (var row = 0; row < pieces.length; ++row) {
 
-          if (pieces[r] > -1) {
+          if (pieces[row] > -1) {
 
-            var row = r;
-            //var prevRow = (row - 1) || null;
             var remain = pieces.slice( row + 1);
 
             for (var n = ( row + 1); n < remain.length; ++n) {
               if (pieces[n] === (pieces[row] + n)) {
 
-                //console.log(game);
                 returnValue = true;
               }
             }
@@ -208,8 +205,6 @@
     hasAnyMajorDiagonalConflicts: function() {
       return this.hasMajorDiagonalConflictAt(0);
     },
-
-
 
     // Minor Diagonals - go from top-right to bottom-left
     // --------------------------------------------------------------

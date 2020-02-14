@@ -17,12 +17,27 @@
 
 window.findNRooksSolution = function(n) {
 
-  var solution = []; //fixme
+  var board = new Board({n});
+
+  //console.log(board.hasRowConflictAt(0));
+
+  var game = board.attributes;
 
   for (var r = 0; r < n; r++) {
-    var row = new Array(n);
-    console.log('array 2', row)
+    var row = game[r];
+    for (var c = 0; c < row.length; c++) {
+      row[c] = 1;
+      if (this.hasRowConflictAt(r) || this.hasColConflictAt(row[r])) {
+        row[c] = 0;
+      }
+    }
   }
+
+  game.length = game.n;
+  delete game.n;
+
+  var solution = Array.prototype.slice.call(game);
+
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
